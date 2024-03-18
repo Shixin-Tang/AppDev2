@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using log4net;
+using log4net.Config;
 
 namespace Book
 {
     internal class Program
     {
+        private static readonly ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         static void Main(string[] args)
         {
 
@@ -36,16 +40,20 @@ namespace Book
                 books.Add(book);
 
                 Console.WriteLine("Book added successfully.\n");
+                log.Info(book.name + book.pages + book.publicationYear + "Book added successfully.");
             }
 
             SaveBooksToCsv(books, filePath);
             Console.WriteLine("Write books into books.csv file.\n");
+            log.Info("Write books into books.csv file.");
 
             List<Book> loadedBooks = LoadBooksFromCsv(filePath);
             Console.WriteLine("\nBooks loaded from books.csv file:");
+            log.Info("Books loaded from books.csv file:");
             foreach (var book in loadedBooks)
             {
                 Console.WriteLine(book.ToCsvString());
+                log.Info(book.ToCsvString());
             }
 
             while (true)
