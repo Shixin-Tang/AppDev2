@@ -14,6 +14,7 @@ namespace Book
 
         static void Main(string[] args)
         {
+            XmlConfigurator.Configure(new System.IO.FileInfo("log4net.config"));
 
             List<Book> books = new List<Book>();
 
@@ -40,7 +41,7 @@ namespace Book
                 books.Add(book);
 
                 Console.WriteLine("Book added successfully.\n");
-                log.Info(book.name + book.pages + book.publicationYear + "Book added successfully.");
+                log.Info(" " + book.name + " " + book.pages + " " + book.publicationYear + " Book added successfully.");
             }
 
             SaveBooksToCsv(books, filePath);
